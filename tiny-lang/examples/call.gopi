@@ -1,0 +1,7 @@
+func add(num a, num b) {
+    return a + b;
+}
+
+func main() {
+    return add(10, 20);
+}

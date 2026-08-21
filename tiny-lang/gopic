@@ -1,0 +1,23 @@
+#!/bin/zsh
+set -e
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <file.gopi>"
+    exit 1
+fi
+
+source="$1"
+name=$(basename "$source" .gopi)
+
+rm -rf build/classes
+mkdir -p build/classes build/bin
+
+javac -d build/classes $(find src -name "*.java")
+java -cp build/classes Main "$source" -o "build/bin/$name"
+
+set +e
+./build/bin/"$name"
+exit_code=$?
+set -e
+
+echo "Exit: $exit_code"
